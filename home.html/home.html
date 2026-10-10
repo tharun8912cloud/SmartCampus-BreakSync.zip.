@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCampus BreakSync</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #ff4757;
+            border-bottom: 2px solid #ff4757;
+            padding-bottom: 5px;
+        }
+        button {
+            background-color: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #ff6b81;
+        }
+        input[type="number"] {
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 60px;
+        }
+        .order-summary {
+            background-color: #f1f2f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to SmartCampus BreakSync!</h1>
+    <p>Order your food before the lunch break.</p>
+<h2>Food Menu</h2>
+
+<div>
+    <h3>🥪 Veg Sandwich</h3>
+    <p>Price: ₹40</p>
+ <button onclick="showOrder('Veg Sandwich', 40)">
+    Order Now
+</button>
+</div>
+
+<div>
+    <h3>🍜 Veg Noodles</h3>
+    <p>Price: ₹60</p>
+<button onclick="showOrder('Veg Noodles', 60)">Order Now</button>
+</div>
+
+<div>
+    <h3>☕ Tea</h3>
+    <p>Price: ₹15</p>
+    <button onclick="showOrder('Tea', 15)">Order Now</button>
+</div>   
+ 
+<div>
+    <h3>🌯 Veg Roll</h3>
+    <p>Price: ₹60</p>
+   <button onclick="showOrder('Veg Roll', 60)">Order Now</button> 
+</div>
+
+<div>
+    <h3>🌯 Chicken Roll</h3>
+    <p>Price: ₹60</p>
+    <button onclick="showOrder('Chicken Roll', 60)">Order Now</button>
+</div>
+
+<div>
+    <h3>🍫 Special Brownie</h3>
+    <p>Price: ₹50</p>
+    <button onclick="showOrder('Special Brownie', 50)">Order Now</button>
+</div>
+
+<h2>Student Details</h2>
+
+<label for="student-name">Student Name:</label>
+<input type="text" id="student-name"
+       placeholder="Enter your name">
+
+<br><br>
+
+<label for="register-number">Register Number:</label>
+<input type="text" id="register-number"
+       placeholder="Enter your register number">
+
+<h2>Order Summary</h2>
+
+<div class="order-summary">
+    <div id="cart-items">
+        No Food selected yet.
+    </div>
+
+    <p id="total-price">Total: ₹0</p>
+
+    <button onclick="placeOrder()">Place Order</button>
+</div>
+
+<script>
+let cart = {};
+let orderNumber = 1001;
+
+function showOrder(food, price) {
+    if (cart[food]) {
+        cart[food].quantity++;
+    } else {
+        cart[food] = {
+            price: price,
+            quantity: 1
+        };
+    }
+
+    updateCart();
+}
+
+function changeQuantity(food, change) {
+    if (!cart[food]) return;
+
+    cart[food].quantity += change;
+
+    if (cart[food].quantity <= 0) {
+        delete cart[food];
+    }
+
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const totalPrice = document.getElementById("total-price");
+
+    let total = 0;
+    let html = "";
+
+    for (const food in cart) {
+        const item = cart[food];
+        const subtotal = item.price * item.quantity;
+
+        total += subtotal;
+
+        html += `
+            <div style="padding: 10px 0; border-bottom: 1px solid #ddd;">
+                <h3>${food}</h3>
+                <p>Price: ₹${item.price}</p>
+
+                <button onclick="changeQuantity('${food}', -1)">-</button>
+
+                <span style="margin: 0 12px;">
+                    ${item.quantity}
+                </span>
+
+                <button onclick="changeQuantity('${food}', 1)">+</button>
+
+                <p>Subtotal: ₹${subtotal}</p>
+            </div>
+        `;
+    }
+
+    cartItems.innerHTML = html || "No Food selected yet.";
+    totalPrice.innerText = "Total: ₹" + total;
+}
+
+function placeOrder() {
+    const name = document.getElementById("student-name").value.trim();
+    const registerNumber =
+        document.getElementById("register-number").value.trim();
+
+    if (!name || !registerNumber) {
+        alert("Please enter your name and register number!");
+        return;
+    }
+
+    if (Object.keys(cart).length === 0) {
+        alert("Please select at least one food item!");
+        return;
+    }
+
+    let message = "ORDER CONFIRMATION\n\n";
+    message += "Order Number: BCS" + orderNumber + "\n";
+    message += "Student Name: " + name + "\n";
+    message += "Register Number: " + registerNumber + "\n\n";
+    message += "ORDER ITEMS:\n";
+
+    let total = 0;
+
+    for (const food in cart) {
+        const item = cart[food];
+        const subtotal = item.price * item.quantity;
+
+        message += food + " x " + item.quantity
+            + " = ₹" + subtotal + "\n";
+
+        total += subtotal;
+    }
+
+    message += "\nTotal Amount: ₹" + total;
+    message += "\n\nOrder placed successfully!";
+
+    alert(message);
+
+    orderNumber++;
+    cart = {};
+    updateCart();
+}
+</script>
+
+</body>
+</html>

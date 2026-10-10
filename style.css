@@ -1,0 +1,167 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6fa;
+  color: #263238;
+  line-height: 1.5;
+}
+
+.container {
+  width: min(100% - 32px, 1000px);
+  margin: 30px auto;
+  padding: 28px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin-top: 0;
+  color: #ff4058;
+}
+
+h2 {
+  margin-top: 28px;
+  padding-bottom: 8px;
+  color: #ff4058;
+  border-bottom: 2px solid #ff4058;
+}
+
+.intro {
+  color: #5f6b73;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.food-card {
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.food-card h3 {
+  margin-top: 0;
+}
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: #ff4058;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #e92d47;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #ffb0bb;
+  outline-offset: 2px;
+}
+
+.student-fields {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  max-width: 600px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b9c0c8;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.order-summary {
+  padding: 20px;
+  background: #f0f2f6;
+  border-radius: 10px;
+}
+
+.cart-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #d5d9e0;
+}
+
+.cart-item:first-child {
+  padding-top: 0;
+}
+
+.cart-item h3 {
+  margin-top: 0;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.quantity-controls button {
+  min-width: 38px;
+  padding: 7px 12px;
+}
+
+#total-price {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.confirmation {
+  margin-top: 20px;
+  padding: 22px;
+  border: 1px solid #a7dfbd;
+  border-radius: 10px;
+  background: #f0fff5;
+  overflow-wrap: anywhere;
+}
+
+.confirmation h2 {
+  margin-top: 0;
+  color: #207a43;
+  border-bottom-color: #a7dfbd;
+}
+
+.confirmation-total {
+  font-size: 18px;
+}
+
+.success-message {
+  color: #207a43;
+  font-weight: bold;
+}
+
+@media (max-width: 560px) {
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 18px;
+    border-radius: 0;
+  }
+
+  .student-fields {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .student-fields input {
+    margin-bottom: 10px;
+  }
+}
