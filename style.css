@@ -165,3 +165,50 @@ input {
     margin-bottom: 10px;
   }
 }
+header {
+    background: #4f46e5;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    font-size: 18px;
+}
+
+main {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+section {
+    background: white;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+section h2 {
+    color: #4f46e5;
+}
+
+section a {
+    display: inline-block;
+    background: #4f46e5;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+section a:hover {
+    background: #3730a3;
+}
