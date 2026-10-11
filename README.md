@@ -15,7 +15,7 @@ SmartCampus BreakSync is a student practice project designed to make campus brea
 - JavaScript
 
 ## Live Website
-[Open SmartCampus BreakSync](https://tharun8912cloud.github.io/SmartCampus-BreakSync.zip/)
+https://tharun8912cloud.github.io/SmartCampus-BreakSync.zip./
 ## GitHub Repository
 https://github.com/tharun8912cloud/SmartCampus-BreakSync.zip
 
